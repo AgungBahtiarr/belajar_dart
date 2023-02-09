@@ -42,4 +42,16 @@ void main(List<String> args) {
   print(ganjil);
   genap.removeAt(0);
   print(genap);
+
+  // Percobaan menggabungkan List
+    var array1 = [1, 2, 3, 4, 5];
+  var array2 = [6, 7, 8, 9, 10];
+  List<num> array3 = [];
+  for (var i = 0; i < array1.length; i++) {
+    array3.add(array1[i]);
+  }
+  for (var i = 0; i < array2.length; i++) {
+    array3.add(array2[i]);
+  }
+  print(array3);
 }
