@@ -2,8 +2,8 @@ void main(List<String> args) {
   String firstName = "Agung ";
   String lastName = "Bahtiar";
   String fullName = firstName + lastName;
-  // Dart mempunyai String interpolation
   num age = 19;
+  // Dart mempunyai String interpolation
   print("Nama saya adalah ${fullName} dan berumur ${age} tahun");
 
   // Jika ingin menggunakan $ atau {} dalam string bisa menggunakan backslash
