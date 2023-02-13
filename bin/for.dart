@@ -5,4 +5,11 @@ void main(List<String> args) {
       print(i);
     }
   }
+
+  // Perulangan tanpa henti
+  // for (;;) {
+  //   print("Haloo");
+  // }
+
+  
 }
