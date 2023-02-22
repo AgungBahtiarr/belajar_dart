@@ -10,7 +10,7 @@ void sayHello(String firstName, [String? lastName = '']) {
 
 // Optional  Parameter bisa di isi atau tidak menggunakan tanda ? setelah tipe data dan []
 // Tambahkan default value untuk param dengan =
-// Named parameter bisa digunakan dengan menambahkan tanda {}, fungsi nya agar bisa memanggul parameter tanpa berurutan
+// Named parameter bisa digunakan dengan menambahkan tanda {}, fungsi nya agar bisa memanggil parameter tanpa berurutan
 // menjadikan parameter wajib dengan kata kunci required di depan tipedata param
 // Function short expression
 int min(int a, int b) => a - b; // tidak perlu menulisakn return value
