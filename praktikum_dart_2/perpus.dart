@@ -1,14 +1,21 @@
 Map<String, String> dataJoni = {
-  'nama': 'Joni Iskandar',
-  'nim': '20221919',
-  'prodi': 'TRPL',
+  'Nama': 'Joni Iskandar',
+  'NIM': '20221919',
+  'Prodi': 'TRPL',
   'email': 'joni@poliwangi.ac.id'
 };
 Map<String, String> dataAli = {
-  'nama': 'Ali Junaidi',
-  'nim': '20221918',
-  'prodi': 'TRK',
+  'Nama': 'Ali Junaidi',
+  'NIM': '20221918',
+  'Prodi': 'TRK',
   'email': 'ali@poliwangi.ac.id'
+};
+
+Map<String, String> dataAgung = {
+  'Nama': 'Agung Bahtiar',
+  'NIM': '20221920',
+  'Prodi': 'TRPL',
+  'email': 'agung@poliwangi.ac.id'
 };
 
 Map<String, String> buku1 = {
@@ -31,12 +38,14 @@ Map<String, String> peminjam1 = {
   'isbn': '11203',
   'kembali': 'belum'
 };
-List<Map<String, String>> daftarAnggota = [
-  dataJoni,
-  dataAli,
-];
+Map<String, String> peminjam2 = {
+  'nim': '20221919',
+  'isbn': '11202',
+  'kembali': 'belum'
+};
+List<Map<String, String>> daftarAnggota = [dataJoni, dataAli, dataAgung];
 List<Map<String, String>> daftarBuku = [buku1, buku2, buku3];
-List<Map<String, String>> daftarPeminjaman = [peminjam1];
+List<Map<String, String>> daftarPeminjaman = [peminjam1, peminjam2];
 void tampilAnggotaList() {
   print(daftarAnggota);
 }
@@ -76,9 +85,9 @@ List<Map<String, String>> cariBuku(
     {String? judul, String? isbn, String? pengarang}) {
   return daftarBuku
       .where((buku) =>
-          buku["judul"] == judul ||
-          buku["isbn"] == isbn ||
-          buku["pengarang"] == pengarang)
+          buku['judul'] == judul ||
+          buku['isbn'] == isbn ||
+          buku['pengarang'] == pengarang)
       .toList();
 }
 
@@ -131,6 +140,21 @@ bool apakahBukuTersedia({String? isbn}) {
   return apakahBukuTersediaList(isbn: isbn).isNotEmpty;
 }
 
+void peminjamanBuku({String? nim, String? isbn}) {
+  if (apakahPunyaTanggungan(nim: nim)) {
+    print("Peminjaman gagal");
+  } else {
+    for (var anggota in daftarAnggota) {
+      if (anggota['NIM'] == nim) {
+        anggota['kembali'] = 'belum';
+        anggota['isbn'] = '$isbn';
+        daftarPeminjaman.add(anggota);
+      }
+    }
+    print("Peminjaman berhasil");
+  }
+}
+
 void kembalikanBuku({String? nim, String? isbn}) {
   daftarPeminjaman
       .where((peminjam) => peminjam['nim'] == nim && peminjam['isbn'] == isbn)
@@ -138,12 +162,19 @@ void kembalikanBuku({String? nim, String? isbn}) {
   if (daftarPeminjaman.isEmpty) {
     print("Pengembalian gagal");
   } else {
-    print("Pengembalian berhasik");
+    for (var peminjam in daftarPeminjaman) {
+      if (peminjam['nim'] == nim && peminjam['isbn'] == isbn) {
+        peminjam['kembali'] = 'sudah';
+      }
+    }
+    print("Pengembalian berhasil");
   }
 }
 
 void main() {
-  // print(apakahPunyaTanggungan(nim: '20221918'));
-  // print(apakahBukuTersedia(isbn: '11202'));
-  kembalikanBuku(nim: '20221918', isbn: '11202');
+  print("Daftar peminjaman sebelum dikembalikan");
+  print(daftarPeminjaman);
+  print("Setelah dikembalikan");
+  kembalikanBuku(nim: '20221918', isbn: '11203');
+  print(daftarPeminjaman);
 }
